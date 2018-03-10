@@ -7,7 +7,15 @@
     {% endif %}
   </head>
   <body>
-    <div>Microblog: <a href="/index">home</a><a href="/login">Login</a></div>
+    <div>
+        Microblog: 
+        <a href="/index">home</a>
+	{%if current_user.is_anonymous%}
+        <a href="/login">Login</a>
+	{%else%}
+	<a href="/logout">Logout</a>
+	{%endif%}
+    </div>
     <hr>
     {% with messages = get_flashed_messages()%}
     {%if messages%}
