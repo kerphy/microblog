@@ -21,8 +21,8 @@ def login():
     if form.validate_on_submit():
         flash('Login requested for user {},remember_me={}'.format(form.username.data,form.remember_me.data))
         user=User.query.filter_by(username=form.username.data).first()
-        print user
-        print user.password_hash
+        #print user
+        #print user.password_hash
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
@@ -74,8 +74,9 @@ def before_request():
 @app.route('/edit_profile',methods=['GET','POST'])
 @login_required
 def edit_profile():
-    form=EditProfileForm()
+    form=EditProfileForm(current_user.username)
     if form.validate_on_submit():
+        form.validate_username(form.username)
         current_user.username=form.username.data
         current_user.about_me=form.about_me.data
         db.session.commit()
