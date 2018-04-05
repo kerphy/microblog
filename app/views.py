@@ -25,7 +25,7 @@ def index():
     prev_url = url_for('index',page=posts.prev_num) \
         if posts.has_prev else None    
     return render_template('index.html',title='Home',form=form,
-        posts=posts.item,next_url=next_url,prev_url=prev_url)
+        posts=posts.items,next_url=next_url,prev_url=prev_url)
 
 @app.route('/login',methods=['GET','POST'])
 def login():
@@ -143,6 +143,6 @@ def explore():
         if posts.has_next else None
     prev_url = url_for('explore',page=posts.prev_num) \
         if posts.has_prev else None
-    return render_template('index.html',title='explore',form=form,
-        posts=posts.item,next_url=next_url,prev_url=prev_url)
+    return render_template('index.html',title='explore',
+        posts=posts.items,next_url=next_url,prev_url=prev_url)
 

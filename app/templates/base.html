@@ -1,13 +1,17 @@
+{% extends 'bootstrap/base.html' %}
 <html>
   <head>
+{%block title%}
     {% if title%}
     <title>{{title}} - microblog</title>
     {% else %}
     <title>microblog</title>
     {% endif %}
+{%endblock%}
   </head>
   <body>
     <div>
+{%block navbar%}
         Microblog: 
         <a href="/index">home</a>
 	{%if current_user.is_anonymous%}
@@ -17,8 +21,10 @@
 	<a href="/logout"> Logout</a>
 	{%endif%}
 	<a href="{{url_for('explore')}}">Explore</a>
+{%endblock%}
     </div>
     <hr>
+{%block content%}
     {% with messages = get_flashed_messages()%}
     {%if messages%}
     <ul>
@@ -28,7 +34,8 @@
     </ul>
     {%endif%}
     {%endwith%}
-    {% block content%} {% endblock %}
+    {% block app_content%} {% endblock %}
+{% endblock %}
   </body>
 </html>
 
